@@ -4,6 +4,7 @@ from starlette.middleware.cors import CORSMiddleware
 
 from api.errors.http_error import http_error_handler
 from api.http_movie import MovieHttpApi
+from api.http_user import UserHttpApi
 
 origins = [
     "http://localhost:4200",
@@ -22,4 +23,5 @@ class Application(FastAPI):
             allow_headers=["*"]
         )
         self.routes.extend(MovieHttpApi().routes)
+        self.routes.extend(UserHttpApi().routes)
         # self.add_event_handler(HTTPException, http_error_handler)

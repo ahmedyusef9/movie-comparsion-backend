@@ -1,3 +1,5 @@
+from hashlib import md5
+
 import pymongo
 from bson import ObjectId
 from pymongo import MongoClient
@@ -26,6 +28,11 @@ class DataStore(object):
     @staticmethod
     def findById(collection, id):
         cursor = DataStore.DATABASE[collection].find({"_id": ObjectId(id)})
+        return list(cursor)
+
+    @staticmethod
+    def findUser(collection, email, password):
+        cursor = DataStore.DATABASE[collection].find({"email": email, "password": password})
         return list(cursor)
 
 
